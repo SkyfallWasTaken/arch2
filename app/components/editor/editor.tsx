@@ -13,6 +13,7 @@ import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { Underline } from "@tiptap/extension-underline"
 import { Placeholder } from "@tiptap/extension-placeholder"
+import { Mention } from '@tiptap/extension-mention'
 
 // --- Custom Extensions ---
 import { Link } from "./tiptap-extension/link-extension"
@@ -69,6 +70,7 @@ import { ThemeToggle } from "./theme-toggle"
 
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
+import mentionSuggestion from "@/components/editor/suggestions/mentions"
 
 // --- Styles ---
 import "./editor.scss"
@@ -230,6 +232,12 @@ export default function Editor({ simplified = false }) {
             Selection,
             TrailingNode,
             Link.configure({ openOnClick: false }),
+            Mention.configure({
+                HTMLAttributes: {
+                    class: 'mention',
+                },
+                suggestion: mentionSuggestion,
+            }),
         ],
         content: content,
     })
